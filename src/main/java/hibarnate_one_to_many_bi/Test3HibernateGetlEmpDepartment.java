@@ -1,40 +1,40 @@
-package hibernate;
+package hibarnate_one_to_many_bi;
 
-import hibernate.entity.Employee;
+import hibarnate_one_to_many_bi.entity.Department;
+import hibarnate_one_to_many_bi.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
 
-
-public class Test4HibernateUpdateHql {
+public class Test3HibernateGetlEmpDepartment {
 
     public static void main(String[] args) {
 
 
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Department.class)
                 .buildSessionFactory();
 
+        Session session = null;
         try {
 
-            Session session = factory.getCurrentSession();
+            session = factory.getCurrentSession();
             session.beginTransaction();
 
-            //simple setter
-            Employee emp = session.get(Employee.class, 48);
-            emp.setSalary(666);
 
-            //query with parameters
-            session.createQuery("update Employee set salary=1500 " + "where name='Name4'").executeUpdate();
+            Employee emp = session.get(Employee.class,1);
+
+            System.out.println(emp);
+            System.out.println(emp.getDepartment());
 
             session.getTransaction().commit();
 
         } finally {
+            session.close();
             factory.close();
         }
-
-
     }
+
 }

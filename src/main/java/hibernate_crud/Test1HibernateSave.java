@@ -1,12 +1,12 @@
-package hibernate;
+package hibernate_crud;
 
-import hibernate.entity.Employee;
+import hibernate_crud.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-public class Test2HibernateSelectById {
+public class Test1HibernateSave {
 
     public static void main(String[] args) {
 
@@ -18,22 +18,11 @@ public class Test2HibernateSelectById {
         try {
 
             Session session = factory.getCurrentSession();
-            Employee employee = new Employee("Name4", "Sister", "Sales", 900);
-
+            Employee employee = new Employee("Name1", "Bro", "IT", 596);
             session.beginTransaction();
+
             session.save(employee);
-//            session.getTransaction().commit();
-
-            int myId = employee.getId();
- //           session = factory.getCurrentSession();
-//            session.beginTransaction();
-
-            Employee emp = session.get(Employee.class, myId);
             session.getTransaction().commit();
-            System.out.println("PRINTED + " + emp);
-
-
-
 
         } finally {
             factory.close();

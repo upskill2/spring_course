@@ -1,9 +1,9 @@
-package hibernate.entity;
+package hibernate_multi_table.entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "employees_test")
 public class Employee {
 
     @Id
@@ -23,6 +23,13 @@ public class Employee {
     @Column(name="salary")
     private int salary;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "details_id")
+    private Detail empDetail;
+
+    @Column(name="department_id")
+    private int departmentId;
+
     public Employee() {
 
     }
@@ -32,7 +39,9 @@ public class Employee {
         this.surname = surname;
         this.department = department;
         this.salary = salary;
+
     }
+
 
     @Override
     public String toString() {
@@ -83,6 +92,22 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Detail getEmpDetail() {
+        return empDetail;
+    }
+
+    public void setEmpDetail(Detail empDetail) {
+        this.empDetail = empDetail;
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
 }

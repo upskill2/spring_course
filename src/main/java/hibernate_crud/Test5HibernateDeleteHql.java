@@ -1,14 +1,12 @@
-package hibernate;
+package hibernate_crud;
 
-import hibernate.entity.Employee;
+import hibernate_crud.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
 
-
-public class Test3HibernateSelectHql {
+public class Test5HibernateDeleteHql {
 
     public static void main(String[] args) {
 
@@ -22,12 +20,14 @@ public class Test3HibernateSelectHql {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
 
-            List<Employee> empList = session.createQuery("from Employee " + "where name='Name3' AND salary=1900").getResultList();
+            Employee emp = session.get(Employee.class,48);
+            session.delete(emp);
 
-            for (Employee em : empList) {
-                System.out.println("PRINTED " + em);
-                
-            }
+            //
+            session.createQuery("delete Employee " + "where name = 'name1'").executeUpdate();
+
+            //simple setter
+
 
             session.getTransaction().commit();
 
@@ -35,6 +35,6 @@ public class Test3HibernateSelectHql {
             factory.close();
         }
 
-
     }
+
 }
